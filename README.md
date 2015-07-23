@@ -1,2 +1,2 @@
-# exceptioneer-laravel
-Exceptioneer client for Laravel and Lumen
+# exceptioneer-laravel4
+Exceptioneer client for Laravel 4.2.x
