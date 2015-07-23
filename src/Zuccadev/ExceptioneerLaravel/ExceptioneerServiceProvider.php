@@ -29,7 +29,7 @@ class ExceptioneerServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        $this->package('zuccadev/exceptioneer-laravel');
+        $this->package('zuccadev/exceptioneer-laravel4');
     }
 
     public function provides()
@@ -39,10 +39,10 @@ class ExceptioneerServiceProvider extends ServiceProvider
 
     protected function loadConfig()
     {
-        $apiKey = Config::get('exceptioneer-laravel::apiKey');
-        $stage = Config::get('exceptioneer-laravel::stage');
-        $endpoint = Config::get('exceptioneer-laravel::endpoint');
-        $logInApp = Config::get('exceptioneer-laravel::logInApp');
+        $apiKey = Config::get('exceptioneer-laravel4::apiKey');
+        $stage = Config::get('exceptioneer-laravel4::stage');
+        $endpoint = Config::get('exceptioneer-laravel4::endpoint');
+        $logInApp = Config::get('exceptioneer-laravel4::logInApp');
 
         return compact('apiKey', 'stage', 'endpoint', 'logInApp');
     }
