@@ -2,13 +2,17 @@
 
 namespace Zuccadev\ExceptioneerLaravel;
 
+use GuzzleHttp\Exception\ClientException;
+use Illuminate\Support\Facades\Log;
+use Psr\Log\LoggerInterface;
+
 class Exceptioneer
 {
     protected $client;
 
     protected $parser;
 
-    private $config;
+    protected $config;
 
     /**
      * @param Client $client
@@ -32,10 +36,25 @@ class Exceptioneer
         $apiKey = $this->getApiKey();
         $stage = $this->getStage();
         $endpoint = $this->getEndpoint();
+        $logInApp = $this->getLogInApp();
 
         $notification = $this->parser->createNotification($e, $stage, $apiKey);
 
-        $this->client->send($notification, $endpoint);
+        if ($logInApp) {
+            Log::error($e);
+        }
+
+        try {
+
+            Log::info('Sending exception to Exceptioneer...');
+            $this->client->send($notification, $endpoint);
+            Log::info('Exception sent to Exceptioneer');
+
+        } catch (ClientException $exception) {
+
+            Log::error('Error while sending the exception to Exceptioneer');
+
+        }
     }
 
     /**
@@ -69,5 +88,16 @@ class Exceptioneer
         if ($this->config['endpoint']) {
             return $this->config['endpoint'];
         } else throw new Exception('No endpoint configured.');
+    }
+
+    /**
+     * @return mixed
+     * @throws Exception
+     */
+    protected function getLogInApp()
+    {
+        if (isset($this->config['logInApp'])) {
+            return $this->config['logInApp'];
+        } else throw new Exception('No "log in app" setting configured.');
     }
 }

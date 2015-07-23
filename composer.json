@@ -1,6 +1,6 @@
 {
     "name": "zuccadev/exceptioneer-laravel",
-    "description": "Exceptioneer client for Laravel and Lumen",
+    "description": "Exceptioneer client for Laravel 4.2.x",
     "license": "MIT",
     "authors": [
         {
@@ -8,17 +8,13 @@
             "email": "s.pescina@gmail.com"
         }
     ],
+    "require": {
+        "guzzlehttp/guzzle": "6.0.x"
+    },
     "autoload": {
-        "psr-4": {
-            "Zuccadev\\ExceptioneerLaravel\\": "src/"
+        "psr-0": {
+            "Zuccadev\\ExceptioneerLaravel": "src/"
         }
     },
-    "minimum-stability": "stable",
-    "require": {
-        "hassankhan/config": "0.8.x",
-        "illuminate/support": "5.1.x",
-        "guzzlehttp/guzzle": "6.0.x",
-        "psr/log": "1.0.x",
-        "illuminate/http": "5.1.x"
-    }
+    "minimum-stability": "stable"
 }
